@@ -6,8 +6,8 @@ on:
         type: string 
         default: "API Security tests"
 
-env:
-  PYNT_CREDENTIALS: ${{ secrets.YOURPYNTID }}
+#env:
+  #PYNT_CREDENTIALS: ${{ secrets.YOURPYNTID }}
 
 jobs:
  api-security:
