@@ -1,25 +1,25 @@
-name: Example pynt yml 
-on: 
-  workflow_dispatch:
-    inputs: 
-      comment: 
-        type: string 
-        default: "API Security tests"
+name: Security Test
 
-#env:
-  #PYNT_CREDENTIALS: ${{ secrets.YOURPYNTID }}
+on: [push]
 
 jobs:
- api-security-test:
-  runs-on: ubuntu-latest
+  security-test:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
 
-  steps: 
-    - name: install pynt cli
-      run: | 
-        python3 -m pip install --upgrade pyntcli 
-    - name: get goat collection 
-      run: | 
-        curl https://raw.githubusercontent.com/pynt-io/pynt/main/goat_functional_tests/goat.postman_collection.json -o goat.json 
-    - name: run pynt with newman integration 
-      run: | 
-        pynt newman --collection goat.json 
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.x'
+
+      - name: Install PyntCLI
+        run: python -m pip install --upgrade pyntcli
+
+      - name: Get GOAT Collection
+        run: curl https://raw.githubusercontent.com/pynt-io/pynt/main/goat_functional_tests/goat.postman_collection.json -o goat.json
+
+      - name: Run Pynt with Newman Integration
+        run: pynt newman --collection goat.json
