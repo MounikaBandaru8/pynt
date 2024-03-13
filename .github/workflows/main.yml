@@ -10,7 +10,7 @@ on:
   #PYNT_CREDENTIALS: ${{ secrets.YOURPYNTID }}
 
 jobs:
- api-security:
+ api-security-test:
   runs-on: ubuntu-latest
 
   steps: 
