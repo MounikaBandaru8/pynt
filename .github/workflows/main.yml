@@ -24,3 +24,4 @@ jobs:
       - name: Run Pynt with Newman Integration
         run: pynt newman --collection goat.json
 
+
